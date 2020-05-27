@@ -1,3 +1,3 @@
 # Gloom
 
-A package implementing the bloom filter in Golang. 
+A Go package implementing the bloom filter.
