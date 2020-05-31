@@ -60,3 +60,23 @@ func (b *BloomFilter) Clear() {
 	b.n = 0
 	b.bitArr.Reset()
 }
+
+func (b *BloomFilter) getIndices(thing []byte) []uint64 {
+	h1 := xxhash.Sum64(thing)
+	var h2 uint64
+	if thing[0] < 255 {
+		thing[0] = thing[0] + 1
+	} else {
+		thing[0] = 0
+	}
+	h2 = xxhash.Sum64(thing)
+
+	h := h1
+	var indices []uint64
+	for i := uint64(0); i < b.k; i++ {
+		h += i * h2
+		indices = append(indices, h%b.m)
+	}
+
+	return indices
+}
