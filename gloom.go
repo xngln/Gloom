@@ -50,3 +50,8 @@ func (b *BloomFilter) Contains(thing []byte) bool {
 func (b *BloomFilter) ContainsString(thing string) bool {
 	return b.Contains([]byte(thing))
 }
+
+func (b *BloomFilter) FalsePosProb() float64 {
+	p := math.Pow(1-math.Pow(1-(1/float64(b.m)), float64(b.k*b.n)), float64(b.k))
+	return p
+}
