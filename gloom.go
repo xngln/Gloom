@@ -30,3 +30,6 @@ func (b *BloomFilter) Add(thing []byte) {
 	b.n++
 }
 
+func (b *BloomFilter) AddString(thing string) {
+	b.Add([]byte(thing))
+}
