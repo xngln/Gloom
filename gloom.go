@@ -13,3 +13,9 @@ type BloomFilter struct {
 	n      uint64
 	bitArr bitarray.BitArray
 }
+
+func New(m uint64, k uint64) *BloomFilter {
+	ba := bitarray.NewBitArray(m)
+	b := BloomFilter{m, k, 0, ba}
+	return &b
+}
