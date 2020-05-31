@@ -33,3 +33,17 @@ func (b *BloomFilter) Add(thing []byte) {
 func (b *BloomFilter) AddString(thing string) {
 	b.Add([]byte(thing))
 }
+
+func (b *BloomFilter) Contains(thing []byte) bool {
+	indices := b.getIndices(thing)
+
+	for _, index := range indices {
+		// ignore err returned by GetBit since err != nil returned only
+		// when index is out of range, but we make sure index is in range
+		if bit, _ := b.bitArr.GetBit(index); !bit {
+			return false
+		}
+	}
+	return true
+}
+
