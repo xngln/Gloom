@@ -47,3 +47,6 @@ func (b *BloomFilter) Contains(thing []byte) bool {
 	return true
 }
 
+func (b *BloomFilter) ContainsString(thing string) bool {
+	return b.Contains([]byte(thing))
+}
