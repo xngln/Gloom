@@ -19,3 +19,14 @@ func New(m uint64, k uint64) *BloomFilter {
 	b := BloomFilter{m, k, 0, ba}
 	return &b
 }
+
+func (b *BloomFilter) Add(thing []byte) {
+	indices := b.getIndices(thing)
+
+	for _, index := range indices {
+		b.bitArr.SetBit(index)
+	}
+
+	b.n++
+}
+
