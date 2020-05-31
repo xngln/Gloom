@@ -55,3 +55,8 @@ func (b *BloomFilter) FalsePosProb() float64 {
 	p := math.Pow(1-math.Pow(1-(1/float64(b.m)), float64(b.k*b.n)), float64(b.k))
 	return p
 }
+
+func (b *BloomFilter) Clear() {
+	b.n = 0
+	b.bitArr.Reset()
+}
